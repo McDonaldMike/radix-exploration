@@ -2,7 +2,13 @@ import "./App.css";
 import { NavigationMenu, Popover, Form } from "radix-ui";
 import { ReactElement, useState } from "react";
 
+// some of these components below would be separate files, but with React I think in some cases it might end up being better to define child components inside the same file as their parents
+// (like if they'll for sure never be reused, and we're only splitting components to avoid writing tailwind classes 10000 times or whatever)
+
 const NavItemLink = (props: { text: string }) => {
+  // this is a good example of how we'll have to rethink styling with Tailwind vs vanilla CSS 
+  // instead of sharing CSS classes we'd separate any elements with the same styles into their own components
+  // so we only have to add the tailwind classes once (sometimes as their own files, sometimes in the same file as the parent component)
     const { text } = props;
     return <a className="mr-4 text-[12px]">{text}</a>;
 };
@@ -27,6 +33,7 @@ const NavItemDropdownContent = () => {
 };
 
 const NavItemSearchContent = () => {
+  // This would probably be its own component in its own file, and actual logic would either go here or be passed in as props from the parent
     const [selectedGender, setSelectedGender] = useState("menswear");
 
     return (
